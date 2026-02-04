@@ -1,2 +1,2 @@
-# Cypher---2-Axis-Rhythm-Rig
+# Cypher - 2 Axis Rhythm Rig
 later :p
