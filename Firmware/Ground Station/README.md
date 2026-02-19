@@ -1,0 +1,12 @@
+# Breakdown Of the Firmware
+- I wrote a custom protocol that sends a 13-byte package to the FC in the same format as designed in the firmware for the FC.
+	- Joystick Axis: `Throttle`, `Yaw`, `Pitch`, `Roll`
+	- Knobs: Direct Control for Gimbal Pitch and Roll
+	- Buttons: Sends `CAM UP`, `CAM DOWN`, `ARM` and `DISARM` in a bitmask byte.
+- I did not want to complicate things by getting the telemetry back from the drone itself instead, it sends the telemetry to the Raspberry Pi via `UART5`. The Raspberry Pi streams this telemetry back along with the video feed.
+	- The ground station itself is set to blind transmission for now.
+- Instead of displaying `BATTERY: 3.5V` on the OLED, I added some basic maths to map the voltage into a clean percentage based system. Now the OLED displays `BATTERY: 78%`.
+- Although the UI for the OLED is pretty basic, it displays:
+	- Battery percentage on the top.
+	- Drone arm status: `ARMED`/`DISARMED` in the middle.
+	- Raw stick values: `Throttle:`, `Roll:` and `Pitch:` on the bottom.
