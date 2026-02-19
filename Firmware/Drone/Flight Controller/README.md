@@ -1,0 +1,12 @@
+# Breakdown:
+- Since I'm using `DRV8313` as the motor drivers for the gimbal motors, I wrote a custom Sinusoidal PWM generator to drive the motors.
+	- I also bumped the timer frequency to `20KHz` so the motors don't make a band of their own.
+- Since I added a disarm button on the Ground Station, I added a safety mechanism to prevent accidental button presses and mid-air shutdowns unless absolutely necessary.
+	- The drone disarms only when the button is pressed twice.
+- Since I'm running a 6S battery structure for better efficiency and flight time, but my motors are rated for 4S batteries, I implemented a hardcoded firmware limit. It limits the motors to 66%.
+	- This makes the drone work like it would when it's connected to a 4S battery structure.
+- In the last firmware I wrote, I did not account for the buttons and knobs on the ground station. I expanded the 9-byte packet to a 13-byte package.
+	- It now accommodates the knobs for direct control of the gimbal pitch and roll.
+	- I added firmware for the buttons that handle `Camera Down`, `Camera Up`, `Arm`, and `Disarm`.
+- I also did not set up the stabilisation for the gimbal in the last firmware. Now, the gimbal isn't just on manual control, it stabilises the camera.
+	- I updated the math to subtract the drone's IMU angle from the target angle, resulting in active stabilisation even if the drone moves fast.
